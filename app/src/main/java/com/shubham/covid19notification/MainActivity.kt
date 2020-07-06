@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private var recyclerView: RecyclerView? = null
     private var requestQueue: RequestQueue? = null
-    private lateinit var notificationData: Array<NotificationData>
+    private lateinit var notificationData: Array<DataMem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,15 +32,6 @@ class MainActivity : AppCompatActivity() {
         requestQueue = Volley.newRequestQueue(this)
 
         parseJson()
-
-      /*  pdfbtn.setOnClickListener {
-
-            val intent = Intent(this@MainActivity,WebViewActivity::class.java)
-            startActivity(intent)
-
-
-        }
-*/
 
     }
 
@@ -53,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                     val array = response.getJSONObject("data").getJSONArray("notifications")
                     val gsonBuilder = GsonBuilder()
                     val gson: Gson = gsonBuilder.create()
-                    notificationData = gson.fromJson(array.toString(), Array<NotificationData>::class.java)
+                    notificationData = gson.fromJson(array.toString(), Array<DataMem>::class.java)
 
                     recyclerView?.adapter = NotificationAdapter(notificationData).apply {
                         onClickListener = {link->
